@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
-import { tileLayer, latLng, circle, polygon, marker, tooltip  } from 'leaflet';
+import { tileLayer, latLng, circle, polygon, marker, tooltip } from 'leaflet';
 import { BeaconService } from '../beacon.service';
-import { REPLAY_DATA } from '../../../data';
+// import { REPLAY_DATA } from '../../../data';
 import { orderBy, uniq } from 'lodash';
 
-const all_data = REPLAY_DATA.filter(d=> ["3b00ddf8-6b04-4c7d-98c3-468f6b718859", "3243f150-f289-4624-bd4d-fb52ece06c3a", "745d7d76-75cb-47bd-a56c-c11d79a882a7", "816e5ae6-528c-4a8c-979b-408c5753ca48", null].indexOf(d.device_beacon) === -1);
+// const all_data = REPLAY_DATA.filter(d => ["3b00ddf8-6b04-4c7d-98c3-468f6b718859", "3243f150-f289-4624-bd4d-fb52ece06c3a", "745d7d76-75cb-47bd-a56c-c11d79a882a7", "816e5ae6-528c-4a8c-979b-408c5753ca48", null].indexOf(d.device_beacon) === -1);
+const all_data = [];
 
 const timestamps = uniq(all_data.map(d => d.timestamp)).sort();
 const beacons = uniq(all_data.map(d => d.device_beacon));
@@ -59,9 +60,9 @@ export class ReplayMapComponent implements OnInit {
         this.last_reported[b] = current_beacon;
 
         if (current_beacon) {
-                  // return tooltip({permanent: true}).setContent(current_beacon.device_beacon).setLatLng({ lat: current_beacon.latitide, lng: current_beacon.longitude})
+          // return tooltip({permanent: true}).setContent(current_beacon.device_beacon).setLatLng({ lat: current_beacon.latitide, lng: current_beacon.longitude})
 
-          return circle({ lat: current_beacon.latitide, lng: current_beacon.longitude}, { radius: 200 })
+          return circle({ lat: current_beacon.latitide, lng: current_beacon.longitude }, { radius: 200 })
         }
         // return circle({ lat: b.latitide, lng: b.longitude}, { radius: 50 })
       }).filter(xs => !!xs);
